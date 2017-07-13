@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Operation } from './common/operation.model';
+import { State, Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `{{ operations | json }}`
 })
 export class AppComponent {
-  title = 'app';
+  public operations: Array<Operation>;
+
+  constructor(private _store: Store<State<any>>) {
+    _store.select('operations').subscribe((state: Array<Operation>) => {
+      this.operations = state;
+    });
+  }
 }
