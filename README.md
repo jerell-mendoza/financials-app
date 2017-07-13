@@ -1,0 +1,1 @@
+Test application with Angular2 and ngrx!
